@@ -1,0 +1,343 @@
+7.7.1
+def menor_a_mayor(tupla):
+    for i in range(len(tupla) - 1):
+        if tupla[i] > tupla[i+1]:
+            return False
+    return True
+
+print(f"Tupla (1, 5, 5, 9): {menor_a_mayor((1, 5, 5, 9))}")  # True
+print(f"Tupla (8, 5, 12, 2): {menor_a_mayor((8, 5, 12, 2))}")  # False
+
+7.7.2
+a)
+def encajar_ficha(ficha1, ficha2):
+
+    if( ficha1 [0] == ficha2[0]or
+        ficha1 [0] == ficha2[1]or
+        ficha1 [1] == ficha2[0]or
+        ficha1 [1] == ficha2[1]):
+        return "las fichas encajan"
+    else:
+        return "las fichas no encajan"
+    
+ficha1="3,4"
+ficha2="4,5"
+
+print(encajar_ficha(ficha1, ficha2))
+print(encajar_ficha((2,4), (5,10)))
+print(encajar_ficha([5,9], [0,9]))
+
+7.7.2
+b)
+def encajan(cadena):
+    
+    ficha1, ficha2 = cadena.split()
+   
+    a, b = ficha1.split('-')
+    c, d = ficha2.split('-')
+
+    if a == c or a == d or b == c or b == d:
+        return True
+    else:
+        return False
+    
+print("3-4 2-5 →", encajan("3-4 2-5"))  
+print("3-4 4-6 →", encajan("3-4 4-6"))  
+print("6-6 1-6 →", encajan("6-6 1-6"))  
+print("2-3 5-2 →", encajan("2-3 5-2")) 
+
+7.7.3
+a)
+def Estimado(nombres):
+    for nombre in nombres:  
+        print(f"Estimado {nombre}, vote por mí.")
+
+tupla_nombres = ("Santi","Olegario", "Eze", "Lalo")
+Estimado(tupla_nombres)
+
+b) def campaña_n(nombres, posicion, cantidad):
+# Verificar que la posición sea válida
+    if posicion < 0 or posicion >= len(nombres):
+        print("Error: Posición inválida")
+        return
+    
+    # Calcular el final
+    fin = min(posicion + cantidad, len(nombres))
+    
+    # Imprimir mensajes para el rango seleccionado
+    for i in range(posicion, fin):
+        print(f"Estimado {nombres[i]}, vote por mí.")
+
+nombres = ("Pablo", "Messi", "Oscar", "Matias", "Lionel")
+campaña_n(nombres, 1, 3)  # Desde Messi, 3 personas
+
+
+c)
+def votar(tupla_nombres): 
+    tupla_nombres=tuple(tupla_nombres)
+    
+    for  nombre, genero in tupla_nombres: 
+        if genero=='M' : 
+            print("Estimado", nombre , ", vote por mi")
+        else: 
+            genero=='F'
+            print("Estimada", nombre , ", vote por mi")
+
+
+tupla1= (
+    ('alvaro',  'M'), 
+    ('santiago' , 'M'), 
+    ('Maria' ,'F')
+    ) 
+    
+    
+print(votar(tupla1))
+
+7.7.4
+a) def producto_escalar(v1,v2):
+    if len(v1) != len(v2):
+        return "Error"
+    
+    Resultado=0 
+    for i in range(len(v1)):
+        Resultado += v1[i] * v2[i]
+    return Resultado
+
+vect1=[5,6]
+vect2=[2,3]
+print("El producto escalar es: ", producto_escalar(vect1,vect2) )
+
+b)def son_ortogonales(v1, v2):
+    # calculamos el producto escalar
+    producto = sum(a*b for a, b in zip(v1, v2))
+    
+    if producto == 0:
+        return True
+    else:
+        return False
+
+v1 = (2, 3)
+v2 = (-3, 2)
+
+print(son_ortogonales(v1, v2))
+
+c)def Son_paralelos(v1,v2): 
+    (a,b)=v1
+    (c,d)=v2
+    result1= (a/c)
+    result2= (b/d)
+    
+    if result1==result2 : 
+        print("Los vectores, ", v1, v2 ,"son paralelos")
+    if result1!=result2: 
+        print("Los vectores, ", v1, v2 ,"no son paralelos")
+
+producto((3,-5),(-6,10))
+
+d) import math
+def norma(v):
+    (x, y) = v
+    resultado = math.sqrt(x**2 + y**2)
+    return resultado
+
+# Ejemplo
+print("la norma del vector es igual a: ", norma((3, 4)))  
+
+7.7.5
+a) def numero_primo(lista):
+    primos = []
+    for n in lista:
+        if n < 2:
+            continue
+        es_primo = True
+        for i in range(2, n):
+            if n % i == 0:
+                es_primo = False
+                break
+        if es_primo:
+            primos.append(n)
+    return primos
+
+# Ejemplo
+NumerosP = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+print("Los números primos son:", numero_primo(NumerosP))
+
+b) def suma_y_porcentaje(lista):
+    total = sum(lista)
+    print("Sumatoria total:", total)
+    
+    for n in lista:
+        print(n, ":", n * 100 / total, "%") 
+
+# Ejemplo
+numeros = [10, 20, 30, 40]
+suma_y_porcentaje(numeros)
+
+c)def factorial(n):
+    resultado = 1
+    for i in range(1, n+1):
+        resultado *= i
+    return resultado
+
+def lista_factoriales(lista):
+    factoriales = []
+    for n in lista:
+        factoriales.append(factorial(n))
+    return factoriales
+
+# Ejemplo
+numeros = [5, 3, 4]
+print("Factoriales:", lista_factoriales(numeros))
+
+7.7.6
+a y b) def numeros_k(lista, k):
+    menores = []
+    mayores = []
+    iguales = []
+    
+    for n in lista:
+        if n < k:
+            menores.append(n)
+        elif n > k:
+            mayores.append(n)
+        else:
+            iguales.append(n)
+    
+    return menores, mayores, iguales
+
+# Ejemplo
+numeros = [3, 7, 2, 5, 7, 10, 5]
+k = 5
+menores, mayores, iguales = numeros_k(numeros, k)
+
+print("Menores:", menores)
+print("Mayores:", mayores)
+print("Iguales:", iguales)
+
+def multiplos_de_k(lista, k):
+    multiplos = []
+    for n in lista:
+        if n % k == 0:  # si n es divisible por k
+            multiplos.append(n)
+    return multiplos
+
+# Ejemplo
+numeros = [3, 7, 2, 5, 10, 15, 20]
+k = 5
+print("Múltiplos de", k, ":", multiplos_de_k(numeros, k))
+
+7.7.7
+a) def lista_nombre(lista_tuplas):
+    Resultado=[]
+    for persona in lista_tuplas: 
+        apellido= persona[0]
+        Nombre= persona[1]
+        Inicial=persona[2]
+        cadena= Nombre + " " + Inicial + "." + apellido
+        Resultado.append(cadena)
+    return Resultado
+
+Personas= [("Santiago", "Diaz", "B"), ("Mario","Ruiz","F"), ("Carlos", "Martinez", "M")]
+print(lista_nombre(Personas))
+
+7.7.8
+a)def Lista_contraria(lista):
+    return lista[::-1]
+
+Palabras=["Hola", "Messi", "Boca Juniors","Programacion"]
+print("Lista Original\n", Palabras, "\nLa lista invertida")
+print(Lista_contraria(Palabras))
+
+b)
+def Lista_contraria(lista):
+    return list(reversed(lista))
+
+Palabras=["Hola", "Messi", "Boca Juniors","Programacion"]
+print(Lista_contraria(Palabras))
+
+7.7.9
+def empaquetar(lista):
+    resultado=[]
+    contador = 1  # contamos repeticiones
+    for i in range(1, len(lista)):
+        if lista[i] == lista[i-1]:
+            contador += 1
+        else:
+            resultado.append((lista[i-1], contador))
+            contador = 1
+    resultado.append((lista[-1], contador)) 
+    return resultado
+
+listaNum= ([1,1,1,2,2,3,3,8,5,4,4])
+print(empaquetar(listaNum))
+
+7.7.10
+a) def sumar_matrices(A, B):
+    resultado = []
+    for i in range(len(A)):  # recorre filas
+        fila_suma = []
+        for j in range(len(A[0])):  # recorre columnas
+            fila_suma.append(A[i][j] + B[i][j])
+        resultado.append(fila_suma)
+    return resultado
+
+A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+
+print(sumar_matrices(A, B))
+
+b) def producto_matrices(A, B):
+    resultado = []
+    for i in range(len(A)):  # recorre filas de A
+        fila_producto = []
+        for j in range(len(B[0])):  # recorre columnas de B
+            suma = 0
+            for k in range(len(A[0])):  # recorre elementos de la fila de A y columna de B
+                suma += A[i][k] * B[k][j]
+            fila_producto.append(suma)
+        resultado.append(fila_producto)
+    return resultado
+
+A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+
+print(producto_matrices(A, B))
+
+c)def triangular_superior(A):
+    n = len(A)
+    
+    for i in range(n):
+        for j in range(i+1, n):
+            factor = A[j][i] / A[i][i]
+            for k in range(i, n):
+                A[j][k] -= factor * A[i][k]
+                if A[j][k] == int(A[j][k]):
+                    A[j][k] = int(A[j][k])
+                else:
+                    A[j][k] = round(A[j][k], 2)  
+    return A
+A = [[2, 1, -1],
+     [-3, -1, 2],
+     [-2, 1, 2]]
+
+resultado = triangular_superior(A)
+for fila in resultado:
+    print(fila)
+
+d) def linealmente_independientes_2d(vectores):
+    # Solo para 2 vectores de 2D
+    v1 = vectores[0]
+    v2 = vectores[1]
+    
+    determinante = v1[0]*v2[1] - v1[1]*v2[0]
+    
+    if determinante != 0:
+        return True
+    else:
+        return False
+    
+vectores1 = [[1, 0], [0, 1]]
+print("¿El vector",vectores1, "es linealmente independiente?: ", linealmente_independientes_2d(vectores1)) 
+
+vectores2 = [[1, 2], [2, 4]]
+print("¿El vector",vectores2, "es linealmente independiente?: ", linealmente_independientes_2d(vectores2))  
